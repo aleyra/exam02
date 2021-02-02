@@ -37,11 +37,11 @@ int		get_next_line(char **line)
 
 	if(!line)
 		return (-1);
-	if (*line)
-		free(*line);
 	buf[0] = 'a';
 	buf[1] = 0;
-	*line = NULL;
+	*line = ft_strjoin(*line, "");
+	if(!line)
+			return (-1);
 	while((ret = read(0, buf, 1) > 0 && buf[0] != '\n'))
 	{
 		*line = ft_strjoin(*line, buf);
@@ -57,12 +57,6 @@ int		get_next_line(char **line)
 	if(ret == 0 && buf[0] != '\n')
 	{
 		*line = ft_strjoin(*line, buf);
-		if(!line)
-			return (-1);
-	}
-	if(buf[0] == '\n' && *line == NULL)
-	{
-		*line = ft_strjoin(*line, "");
 		if(!line)
 			return (-1);
 	}
