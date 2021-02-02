@@ -39,9 +39,10 @@ int		get_next_line(char **line)
 		return (-1);
 	buf[0] = 'a';
 	buf[1] = 0;
-	*line = ft_strjoin(*line, "");
+	*line = malloc(1 * sizeof(char));
 	if(!line)
 			return (-1);
+	*line[0] = 0;
 	while((ret = read(0, buf, 1) > 0 && buf[0] != '\n'))
 	{
 		*line = ft_strjoin(*line, buf);
