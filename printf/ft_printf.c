@@ -62,7 +62,8 @@ void	ft_display_d(t_pf *tpf, int d)
 	len = 0;
 	p = 1;
 	z = '0';
-	n = (d < 0) ? d * -1 : d;
+	n = d;
+	n = (d < 0) ? n * -1 : n;
 	while(10 * p < n)
 	{
 		len++;
