@@ -17,7 +17,10 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	if(!(s = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char))))
+	{
+		free(s1);
 		return (NULL);
+	}
 	while(s1 && s1[i])
 	{
 		s[i] = s1[i];
@@ -39,13 +42,13 @@ int		get_next_line(char **line)
 	buf[0] = 'a';
 	buf[1] = 0;
 	*line = malloc(1 * sizeof(char));
-	if(!line)
+	if(!(*line))
 			return (-1);
 	*line[0] = 0;
-	while((ret = read(0, buf, 1) > 0 && buf[0] != '\n'))
+	while((ret = read(0, buf, 1)) > 0 && buf[0] != '\n')
 	{
 		*line = ft_strjoin(*line, buf);
-		if(!line)
+		if(!(*line))
 			return (-1);
 	}
 	if (ret == -1)
@@ -53,12 +56,6 @@ int		get_next_line(char **line)
 		if (*line)
 			free(*line);
 		return (-1);
-	}
-	if(ret == 0 && buf[0] != '\n')
-	{
-		*line = ft_strjoin(*line, buf);
-		if(!line)
-			return (-1);
 	}
 	return (ret);
 }
